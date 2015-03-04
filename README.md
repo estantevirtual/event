@@ -1,3 +1,4 @@
+[![Build Status](https://semaphoreapp.com/api/v1/projects/3b801a94-a652-4c1d-b347-ff6006adaf43/364951/shields_badge.svg)](https://semaphoreapp.com/darkseid/event)
 # Event
 
 O objetivo desta GEM é permitir que as Engines que compõem a nova Plataforma da Estante Virutal possam se comunicar sem que estas precisem "se conhecer", garantindo assim um baixo acoplamento entre as Engines.
