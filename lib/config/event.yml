@@ -1,0 +1,23 @@
+development:
+  base_routing_key: module_name
+  broker:
+    ip: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+test:
+  base_routing_key: module_name
+  broker:
+    ip: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+production:
+  base_routing_key: module_name
+  broker:
+    ip: <%=ENV['BROKER_IP'] %>
+    port: <%=ENV['BROKER_PORT'] %>
+    username: <%=ENV['BROKER_USERNAME'] %>
+    password: <%=ENV['BROKER_PASSWORD'] %>
