@@ -11,7 +11,7 @@ Como dito anteriormente, esta gem utiliza o RabbitMQ. Por isso precisamos ter es
 Depois, basta adicionar esta linha no seu Gemfile da sua Engine:
 
 ```ruby
-gem 'event', path: "../event"
+gem 'event', :git => 'git://github.com/estantevirtual/event.git'
 ```
 
 E executar:
