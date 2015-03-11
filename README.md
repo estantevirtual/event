@@ -9,10 +9,23 @@ A solução é baseada no pattern Publish-Subscribe Channel descrito pelo Fowler
 
 Como dito anteriormente, esta gem utiliza o RabbitMQ. Por isso precisamos ter esta dependência instalada. Para realizar a instalação basta seguir o passo a passo descrito neste [link](https://www.rabbitmq.com/download.html)
 
-Depois, basta adicionar esta linha no seu Gemfile da sua Engine:
+Depois, você precisa adicionar um novo source ao seu Gemfile. Este novo source deve ser a primeira linha do seu Gemfile:
 
 ```ruby
-gem 'event', :git => 'git://github.com/estantevirtual/event.git'
+source 'https://repo.fury.io/sergioazevedo'
+source 'https://rubygems.org'
+```
+
+Se vc estiver instalando em uma Engine deve alterar o arquivo 'suaengine.gemspec' e adicionar a dependencia
+
+```ruby
+s.add_dependency "event","~>1.0.0"
+```
+
+Caso seja um projeto Ruby normal ou uma Rails app adicione a linha abaixo no seu Gemfile:
+
+```ruby
+gem "event","~>1.0.0"
 ```
 
 E executar:
