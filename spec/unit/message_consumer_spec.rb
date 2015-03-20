@@ -37,12 +37,18 @@ describe MessageConsumer do
 
   describe "#fire_listeners_of" do
     context "Given a event called new_sku_added with ExampleListener class associated" do
+
       let(:listener_instance){ double(:ExampleListenerInstance, notify: true) }
+      let(:listener_class_name){"ExampleListenerClass"}
       let(:example_listener_class){ double(:ExampleListenerClass, :new => listener_instance) }
       let(:listener_definitions) do
-        { new_sku_added: [example_listener_class] }
+        { new_sku_added: [listener_class_name] }
       end
       let(:message){"event_name : 'new_sku_added', price : 10.0"}
+
+      before do
+        allow(Object).to receive(:const_get).with(listener_class_name).and_return(example_listener_class)
+      end
 
       subject{ MessageConsumer.new(config, logger) }
 

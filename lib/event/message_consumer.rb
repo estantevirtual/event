@@ -29,8 +29,9 @@ module Event
     def fire_listeners_of(event_name, listeners_definitions, data)
       listeners = listeners_definitions[event_name.to_sym]
       if listeners
-        listeners.each do |listener_klass|
-          @logger.info "[Event Handling] - notify event '#{event_name}' using class '#{listener_klass}' with args '#{data}'"
+        listeners.each do |listener_klass_name|
+          @logger.info "[Event Handling] - notify event '#{event_name}' using class '#{listener_klass_name}' with args '#{data}'"
+          listener_klass = Object.const_get(listener_klass_name)
           listener_klass.new(data).notify
         end
       end
