@@ -14,6 +14,14 @@ test:
     username: guest
     password: guest
 
+staging:
+  base_routing_key: module_name
+  broker:
+    ip: <%=ENV['BROKER_IP'] %>
+    port: <%=ENV['BROKER_PORT'] %>
+    username: <%=ENV['BROKER_USERNAME'] %>
+    password: <%=ENV['BROKER_PASSWORD'] %>
+
 production:
   base_routing_key: module_name
   broker:

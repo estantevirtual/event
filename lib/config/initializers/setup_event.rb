@@ -1,7 +1,7 @@
 require 'yaml'
 
 unless Rails.env.test?
-  config = YAML::load_file(File.expand_path("../../event.yml", __FILE__)).with_indifferent_access
+  config = YAML.load(ERB.new(File.read(File.expand_path("../../event.yml",__FILE__))).result).with_indifferent_access
   # Starts the Event Magic ;)
   Event.bootstrap(config[Rails.env])
   #
