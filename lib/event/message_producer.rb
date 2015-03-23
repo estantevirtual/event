@@ -18,7 +18,7 @@ module Event
       else
         msg[:event_date] = DateTime.now
       end
-      @logger.info '[MessageProducer] - Sending event: #{event_name}'
+      @logger.info "[MessageProducer] - Sending event: #{event_name}"
       @logger.debug "[MessageProducer] - Sending event: #{event_name} with data: #{msg.inspect} using as routing_key: #{key}"
       @broker_handler.publish( JSON.generate(msg), key )
     end
