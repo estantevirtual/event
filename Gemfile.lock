@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    event (1.0.5)
-      activesupport (>= 4.2.1)
+    event (1.0.6)
+      activesupport (>= 4.2.0)
       bunny (>= 1.7.0)
 
 GEM
