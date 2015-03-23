@@ -14,7 +14,7 @@ module Event
       @logger.info '[MessageConsumer] - Waiting Messages...'
       consumer_name = "#{@queue_name}_event_consumer"
       @broker_handler.subscribe(consumer_name) do |delivery_info, properties, payload|
-        message = JSON.parse(payload)
+        message = JSON.parse(payload).with_indifferent_access
         event_name = message['event_name']
         @logger.info "[MessageConsumer] - Message Received: #{event_name}"
         fire_listeners_of(event_name, all_listeners, message)
@@ -31,8 +31,12 @@ module Event
       if listeners
         listeners.each do |listener_klass_name|
           @logger.info "[Event Handling] - notify event '#{event_name}' using class '#{listener_klass_name}' with args '#{data}'"
-          listener_klass = Object.const_get(listener_klass_name)
-          listener_klass.new(data).notify
+          begin
+            listener_klass = Object.const_get(listener_klass_name)
+            listener_klass.new(data).notify
+          rescue => e
+            @logger.error "[Event Handling] - #{e}"
+          end
         end
       end
     end
