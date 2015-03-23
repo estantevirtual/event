@@ -25,7 +25,7 @@ module Event
 
   def listen_events!
     Thread.new do
-      log_filename = "log/#{config[:base_routing_key]}_event_consumer.log"
+      log_filename = "log/#{@configuration[:base_routing_key]}_event_consumer.log"
       ensure_file_exists(log_filename)
       logger = Logger.new(log_filename)
       logger.level = Logger::INFO
