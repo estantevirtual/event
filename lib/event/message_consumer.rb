@@ -12,8 +12,8 @@ module Event
 
     def execute(all_listeners)
       @logger.info '[MessageConsumer] - Waiting Messages...'
-      "event_consumer"
-      @broker_handler.subscribe(@queue_name) do |delivery_info, properties, payload|
+      consumer_name = "#{@queue_name}_event_consumer"
+      @broker_handler.subscribe(consumer_name) do |delivery_info, properties, payload|
         message = JSON.parse(payload)
         event_name = message['event_name']
         @logger.info "[MessageConsumer] - Message Received: #{event_name}"
