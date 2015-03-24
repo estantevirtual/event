@@ -1,16 +1,26 @@
-require 'yaml'
+# require 'event'
+# require 'yaml'
 
-unless Rails.env.test?
-  config = YAML.load(ERB.new(File.read(File.expand_path("../../event.yml",__FILE__))).result).with_indifferent_access
-  # Starts the Event Magic ;)
-  Event.bootstrap(config[Rails.env])
-  #
-  # Register your listeners Here!!!! Example:
-  # Event.register_listeners do |config|
-  #   config.add_listeners(:event_name, ['EventNameListener'])
-  #   config.add_listeners(:another_event_name, ['AnotherEventListener1', 'Listener2'])
-  # end
-  #
-  # Starts the Event Listener ;)
-  Event.listen_events!
-end
+# module YourModuleNameHere
+#   class Event
+#     broker_data = File.read( File.expand_path('../../event.yml',__FILE__) )
+#     broker_config = YAML.load(ERB.new(broker_data).result).with_indifferent_access
+#     @@message_producer = ::Event::MessageProducer.new(broker_config[Rails.env], Rails.logger)
+
+#     if !Rails.env.test?
+#       listener_data = File.read( File.expand_path('../../listeners.yml',__FILE__) )
+#       listeners = YAML.load(listener_data).with_indifferent_access
+
+#       if listeners.any?
+#         Thread.new do
+#           consumer = ::Event::MessageConsumer.new(broker_config[Rails.env], Rails.logger)
+#           consumer.execute(listeners)
+#         end
+#       end
+#     end
+
+#     def self.publish(event_name, data={})
+#       @@message_producer.publish(event_name.to_sym, data)
+#     end
+#   end
+# end
