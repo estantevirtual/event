@@ -8,6 +8,11 @@ namespace :event do
     Rails.logger.info "Creating file #{target}"
     FileUtils.cp_r(source, target)
 
+    source = File.join(Gem.loaded_specs["event"].full_gem_path, "lib/config", "listeners.yml")
+    target = File.join("config", "listeners.yml")
+    Rails.logger.info "Creating file #{target}"
+    FileUtils.cp_r(source, target)
+
     source = File.join(Gem.loaded_specs["event"].full_gem_path, "lib/config/initializers", "setup_event.rb")
     target = File.join("config/initializers", "setup_event.rb")
     Rails.logger.info "Creating file #{target}"

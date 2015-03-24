@@ -1,0 +1,2 @@
+#event: ['ClassName']
+#event: ['Module::ClassName']
