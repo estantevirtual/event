@@ -36,6 +36,7 @@ module Event
             listener_klass.new(data).notify
           rescue => e
             @logger.error "[Event Handling] - #{e}"
+            raise e
           end
         end
       end
