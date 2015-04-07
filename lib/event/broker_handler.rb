@@ -33,8 +33,13 @@ module Event
     def subscribe(consumer_name, params={ack: true, block: true}, &block)
       params[:consumer_tag] = consumer_name
       @queue.subscribe(params) do |delivery_info, properties, payload|
-        block.call(delivery_info, properties, payload)
-        channel.ack(delivery_info.delivery_tag)
+        begin
+          block.call(delivery_info, properties, payload)
+          channel.ack(delivery_info.delivery_tag)
+        rescue => e
+          channel.nack(delivery_info.delivery_tag, false, true)
+          raise e
+        end
       end
     end
 
