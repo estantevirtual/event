@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    event (1.0.6)
+    event (1.0.9)
       activesupport (>= 4.2.0)
       bunny (>= 1.7.0)
 

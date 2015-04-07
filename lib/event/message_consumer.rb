@@ -35,7 +35,7 @@ module Event
             listener_klass = Object.const_get(listener_klass_name)
             listener_klass.new(data).notify
           rescue => e
-            @logger.error "[Event Handling] - #{e}"
+            @logger.error "[Event Handling] - #{e} \n #{e.backtrace.join("\n")}"
             raise e
           end
         end
