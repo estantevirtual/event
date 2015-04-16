@@ -1,11 +1,11 @@
 require 'time'
 require 'bunny'
 require 'logger'
-require "event/version"
-require 'event/broker_handler'
-require 'event/message_producer'
-require 'event/message_consumer'
-require 'event/listener'
+require "event_pub_sub/version"
+require 'event_pub_sub/broker_handler'
+require 'event_pub_sub/message_producer'
+require 'event_pub_sub/message_consumer'
+require 'event_pub_sub/listener'
 require 'json'
 require 'securerandom'
 
