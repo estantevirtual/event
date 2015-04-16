@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module Event
+module EventPubSub
 
 describe MessageConsumer do
   let(:logger) { double(:log, debug: true, info: true) }
