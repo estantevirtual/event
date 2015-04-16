@@ -9,6 +9,6 @@ require 'event_pub_sub/listener'
 require 'json'
 require 'securerandom'
 
-module Event
-  warn "[DEPRECATION] This gem has been renamed to event-pub-sub and will no longer be supported. Please switch to event-pub-sub as soon as possible."
+module EventPubSub
+
 end
