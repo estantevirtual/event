@@ -12,12 +12,7 @@ module Event
 
     def publish(event_name, msg={})
       key = routing_key(event_name)
-      msg[:event_name] = event_name
-      if defined?(Rails)
-        msg[:event_date] = Time.zone.now
-      else
-        msg[:event_date] = DateTime.now
-      end
+      enrich_message(event_name, msg)
       @logger.info "[MessageProducer] - Sending event: #{event_name}"
       @logger.debug "[MessageProducer] - Sending event: #{event_name} with data: #{msg.inspect} using as routing_key: #{key}"
       @broker_handler.publish( JSON.generate(msg), key )
@@ -26,6 +21,16 @@ module Event
     private
     def routing_key(event_name)
       "#{@base_routing_key}.#{event_name}"
+    end
+
+    def enrich_message(event_name, msg)
+      msg[:event_id] = SecureRandom.uuid
+      msg[:event_name] = event_name
+      if defined?(Rails)
+        msg[:event_date] = Time.zone.now
+      else
+        msg[:event_date] = Time.now.utc
+      end
     end
   end
 end
