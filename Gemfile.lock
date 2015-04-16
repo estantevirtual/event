@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    event (1.0.9)
+    event-bunny-pub-sub (1.0.10)
       activesupport (>= 4.2.0)
       bunny (>= 1.7.0)
 
@@ -95,7 +95,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.7)
-  event!
+  event-bunny-pub-sub!
   guard-rspec
   pry
   pry-byebug
