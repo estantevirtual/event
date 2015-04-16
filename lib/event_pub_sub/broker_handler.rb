@@ -1,4 +1,4 @@
-module Event
+module EventPubSub
   class BrokerHandler
 
     def initialize(config, logger)

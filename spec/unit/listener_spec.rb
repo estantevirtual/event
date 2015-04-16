@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module Event
+module EventPubSub
   describe Listener do
     describe "api" do
       it { is_expected.to respond_to :notify }

@@ -1,4 +1,4 @@
-module Event
+module EventPubSub
   class MessageConsumer
     def initialize(config, logger)
       raise ArgumentError, "missing module base_routing_key " unless config[:base_routing_key]
