@@ -2,15 +2,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'event/version'
+require 'event_pub_sub/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "event"
-  spec.version       = Event::VERSION
+  spec.name          = "event-pub-sub"
+  spec.version       = EventPubSub::VERSION
   spec.authors       = ["Estante Virutal"]
   spec.email         = ["equipe_ti@estantevirtual.com.br"]
-  spec.summary       = %q{Cliente para envio de mensagens.}
-  spec.description   = %q{Habilita o uso de mensagaria, afim de estabelecer comunicação com outros módulos da plataforma.}
+  spec.summary       = %q{Pub/Sub de Eventos baseado em RabbitMQ.}
+  spec.description   = %q{Pub/Sub de Eventos baseado em RabbitMQ.}
   spec.homepage      = "http://www.estantevirtual.com.br"
 
   spec.files         = `git ls-files -z`.split("\x0")

@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Event
+module EventPubSub
 describe MessageProducer do
   let(:logger) { double(:log, debug: true, info: true) }
   let(:config) do

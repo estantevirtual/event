@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Event
+module EventPubSub
 describe BrokerHandler do
   let(:logger){ double('logger', debug: true)}
   let(:running_server_config) do

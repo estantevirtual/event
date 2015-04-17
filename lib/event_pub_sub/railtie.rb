@@ -1,6 +1,6 @@
 require 'event'
 require 'rails'
-module Event
+module EventPubSub
   class Railtie < Rails::Railtie
     railtie_name :event_bus
 
