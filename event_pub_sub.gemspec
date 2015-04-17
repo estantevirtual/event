@@ -5,7 +5,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'event_pub_sub/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "event-bunny-pub-sub"
+  spec.name          = "event-pub-sub"
   spec.version       = EventPubSub::VERSION
   spec.authors       = ["Estante Virutal"]
   spec.email         = ["equipe_ti@estantevirtual.com.br"]
