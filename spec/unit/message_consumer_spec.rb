@@ -18,7 +18,7 @@ describe MessageConsumer do
   describe "API" do
     subject{ MessageConsumer.new(config, logger) }
     it { should respond_to(:execute) }
-    it { should respond_to(:fire_listeners_of) }
+    it { should respond_to(:get_listeners_of) }
   end
 
   describe ".initialize" do
@@ -35,31 +35,48 @@ describe MessageConsumer do
     end
   end
 
-  describe "#fire_listeners_of" do
+  describe "#get_listeners_of" do
     context "Given a event called new_sku_added with ExampleListener class associated" do
-
-      let(:listener_instance){ double(:ExampleListenerInstance, notify: true) }
-      let(:listener_class_name){"ExampleListenerClass"}
-      let(:example_listener_class){ double(:ExampleListenerClass, :new => listener_instance) }
       let(:listener_definitions) do
-        { new_sku_added: [listener_class_name] }
-      end
-      let(:message){"event_name : 'new_sku_added', price : 10.0"}
-
-      before do
-        allow(Object).to receive(:const_get).with(listener_class_name).and_return(example_listener_class)
+        { new_sku_added: ["ExampleListenerClass"] }
       end
 
       subject{ MessageConsumer.new(config, logger) }
 
-      it "calls example_listener_class#new" do
-        expect(example_listener_class).to receive(:new).once
-        subject.fire_listeners_of('new_sku_added', listener_definitions, message )
+      it "returns [ExampleListenerClass]" do
+        result = subject.get_listeners_of('new_sku_added', listener_definitions)
+        expect(result).to eql ['ExampleListenerClass']
+      end
+    end
+
+    context "Given a listener called AllEventsListener mapped for any event" do
+      let(:listener_definitions) do
+        { any_event: ["AllEventListenerClass"] }
       end
 
-      it "calss example_listener_class#notify" do
-        expect(listener_instance).to receive(:notify).once
-        subject.fire_listeners_of('new_sku_added', listener_definitions, message )
+      subject{ MessageConsumer.new(config, logger) }
+
+      it "returns [AllEventListenerClass]" do
+        result = subject.get_listeners_of('foo_bar_updated', listener_definitions)
+        expect(result).to eql ['AllEventListenerClass']
+      end
+    end
+
+    context "Given a listener called AllEventsListener mapped for any event and new_sku_added mapped to ExampleListener" do
+      let(:listener_definitions) do
+        { new_sku_added: ["ExampleListenerClass"], any_event: ["AllEventListenerClass"] }
+      end
+
+      subject{ MessageConsumer.new(config, logger) }
+
+      it "for 'new_sku_added' event returns [ExampleListenerClass, AllEventListenerClass]" do
+        result = subject.get_listeners_of('new_sku_added', listener_definitions)
+        expect(result).to eql ['ExampleListenerClass', 'AllEventListenerClass']
+      end
+
+      it "for 'product_selled' event returns [AllEventListenerClass]" do
+        result = subject.get_listeners_of('product_selled', listener_definitions)
+        expect(result).to eql ['AllEventListenerClass']
       end
     end
   end

@@ -1,2 +1,7 @@
 #event: ['ClassName']
 #event: ['Module::ClassName']
+### - Se vc tiver um caso onde um ou mais listeners precisam ser executados para qualquer evento,
+### ou seja, se indepentende do evento que aconteceu vc quer que aquele listener rode use a sintaxe abaixo:
+#any_event: [ClassName]
+
+##PS: as sintaxes acimma nao são excludentes, vc pode usar as duas em conjunto

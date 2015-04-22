@@ -1,6 +1,6 @@
 $LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
 require 'bundler'
 Bundler.setup(:default, :test)
-require 'event'
+require 'event_pub_sub'
 require 'pry'
 require 'pry-byebug'
