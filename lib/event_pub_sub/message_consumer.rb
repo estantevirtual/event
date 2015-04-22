@@ -29,8 +29,8 @@ module EventPubSub
 
     def get_listeners_of(event_name, listeners_definitions)
       listeners = listeners_definitions[event_name.to_sym] || []
-      if has_any_event_mapping?(listeners_definitions)
-        listeners.concat get_any_event_listeners(listeners_definitions)
+      if has_mappings_for_any_event?(listeners_definitions)
+        listeners.concat get_listeners_for_any_event(listeners_definitions)
       end
 
       listeners
@@ -53,11 +53,11 @@ module EventPubSub
       end
     end
 
-    def has_any_event_mapping?(listeners_definitions)
+    def has_mappings_for_any_event?(listeners_definitions)
       listeners_definitions[:any_event] && listeners_definitions[:any_event].any?
     end
 
-    def get_any_event_listeners(listeners_definitions)
+    def get_listeners_for_any_event(listeners_definitions)
       listeners_definitions[:any_event]
     end
 
