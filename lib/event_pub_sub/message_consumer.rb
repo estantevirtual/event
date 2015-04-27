@@ -15,7 +15,7 @@ module EventPubSub
       consumer_name = "#{@queue_name}_event_consumer"
       @broker_handler.subscribe(consumer_name) do |delivery_info, properties, payload|
         message = JSON.parse(payload).with_indifferent_access
-        @event_name = message['event_name']
+        event_name = message['event_name']
         @logger.info "[MessageConsumer] - Message Received: #{event_name}"
         listeners_to_execute = get_listeners_of(event_name, all_listeners)
         fire_listeners(listeners_to_execute, message)
