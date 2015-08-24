@@ -34,9 +34,12 @@ module EventPubSub
       params[:consumer_tag] = consumer_name
       @queue.subscribe(params) do |delivery_info, properties, payload|
         begin
+          @logger.info "[#{consumer_name}] - Trying to ack message - #{delivery_info.delivery_tag}"
           block.call(delivery_info, properties, payload)
           channel.ack(delivery_info.delivery_tag)
+          @logger.info "[#{consumer_name}] - Ack!"
         rescue => e
+          @logger.info "[#{consumer_name}] - Error!! Nack! - #{e}"
           channel.nack(delivery_info.delivery_tag, false, true)
           raise e
         end
