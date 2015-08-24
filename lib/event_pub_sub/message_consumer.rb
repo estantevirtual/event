@@ -14,7 +14,9 @@ module EventPubSub
       @logger.info '[MessageConsumer] - Waiting Messages...'
       consumer_name = "#{@queue_name}_event_consumer"
       @broker_handler.subscribe(consumer_name) do |delivery_info, properties, payload|
+        @logger.info "[MessageConsumer] - Trying to parse JSON message - #{payload}"
         message = JSON.parse(payload).with_indifferent_access
+        @logger.info "[MessageConsumer] - Payload parsed successfully! - #{message}"
         event_name = message['event_name']
         @logger.info "[MessageConsumer] - Message Received: #{event_name}"
         listeners_to_execute = get_listeners_of(event_name, all_listeners)
