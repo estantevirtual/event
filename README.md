@@ -82,11 +82,11 @@ Exemplo:
 
 - Um sku foi vendido
 ```ruby
-Event.publish(::sku_saled, sku_id: 10 )
+Event.publish(:sku_saled, sku_id: 10 )
 ```
 - Preço de um sku foi alterado  
 ```ruby
-Event.publish(::sku_price_changed, sku_id: 10, old_price: 1.99, new_price: 2.87 )
+Event.publish(:sku_price_changed, sku_id: 10, old_price: 1.99, new_price: 2.87 )
 ```
   
 ### Assinando os Eventos / Recebendo mensagens
@@ -107,7 +107,7 @@ Exemplo de Listener:
 Considere a mensagem abaixo:
 
 ```ruby
-Event.publish(::sku_price_changed, sku_id: 10, old_price: 1.99, new_price: 2.87 )
+Event.publish(:sku_price_changed, sku_id: 10, old_price: 1.99, new_price: 2.87 )
 ```
 
 
