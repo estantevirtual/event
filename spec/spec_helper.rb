@@ -3,4 +3,4 @@ require 'bundler'
 Bundler.setup(:default, :test)
 require 'event_pub_sub'
 require 'pry'
-require 'pry-byebug'
+require 'byebug'
