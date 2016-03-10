@@ -30,7 +30,7 @@ module EventPubSub
       @queue.bind(topic, routing_key: '#')
     end
 
-    def subscribe(consumer_name, params={ack: true, block: true}, &block)
+    def subscribe(consumer_name, params={ack: true, block: false}, &block)
       params[:consumer_tag] = consumer_name
       @queue.subscribe(params) do |delivery_info, properties, payload|
         begin
@@ -59,7 +59,11 @@ module EventPubSub
 
 
     def channel
-      @channel ||= @connection.create_channel
+      @channel ||= @connection.create_channel(nil, workers_total)
+    end
+
+    def workers_total
+      ENV['TOTAL_RABBIT_WORKERS'] || 4
     end
   end
 end
