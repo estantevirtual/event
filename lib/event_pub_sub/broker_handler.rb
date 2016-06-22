@@ -63,7 +63,7 @@ module EventPubSub
     end
 
     def workers_total
-      ENV['TOTAL_RABBIT_WORKERS'] || 4
+      ENV['TOTAL_RABBIT_WORKERS'].nil? ? 4 : ENV['TOTAL_RABBIT_WORKERS'].to_i
     end
   end
 end
