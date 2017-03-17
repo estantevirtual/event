@@ -158,6 +158,8 @@ Basta descomentar e seguir como no exemplo. Imaginando que queremos registrar o 
 
 **Observação:** Como este arquivo setup_events.rb é carregado na inicialização da aplicação, toda vez que você registrar um evento novo vai precisar reinicar a app.
 
+**Observação:** Atualmente, o producer só consegue enviar mensagens caso haja um consumer.
+
 
 ## Contributing
 1. Fork it ( https://github.com/[my-github-username]/event/fork )
