@@ -37,7 +37,7 @@ module EventPubSub
           block.call(delivery_info, properties, payload)
           channel.ack(delivery_info.delivery_tag)
         rescue => e
-          channel.nack(delivery_info.delivery_tag, false, true)
+          channel.nack(delivery_info.delivery_tag, false, false)
           raise e
         end
       end
