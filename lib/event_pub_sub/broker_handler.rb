@@ -6,6 +6,7 @@ module EventPubSub
       raise ArgumentError, "missing broker port" unless config[:port]
       raise ArgumentError, "missing broker username" unless config[:username]
       raise ArgumentError, "missing broker password" unless config[:password]
+      @topic_name = config[:topic_name].present? ? config[:topic_name] : 'topic_events'
       @config = config
       @logger = logger
     end
@@ -54,7 +55,7 @@ module EventPubSub
     end
 
     def topic
-      @topic ||= channel.topic('topic_events', durable: true)
+      @topic ||= channel.topic(@topic_name, durable: true)
     end
 
 
