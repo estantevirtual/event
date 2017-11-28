@@ -7,7 +7,7 @@ module EventPubSub
       raise ArgumentError, 'missing broker password' unless config[:password]
       @config = config
       @logger = logger
-      @topic = topic
+      @topic_name = topic
     end
 
     def start_connection
@@ -55,7 +55,7 @@ module EventPubSub
     end
 
     def topic
-      @topic ||= channel.topic(@topic, durable: true)
+      @topic ||= channel.topic(@topic_name, durable: true)
     end
 
     def channel
