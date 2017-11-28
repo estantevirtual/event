@@ -1,6 +1,6 @@
 module EventPubSub
   class BrokerHandler
-    def initialize(config, logger, topic: 'topic_events')
+    def initialize(config, logger, topic='topic_events')
       raise ArgumentError, 'missing broker ip' unless config[:ip]
       raise ArgumentError, 'missing broker port' unless config[:port]
       raise ArgumentError, 'missing broker username' unless config[:username]

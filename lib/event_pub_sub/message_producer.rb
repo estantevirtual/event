@@ -1,6 +1,6 @@
 module EventPubSub
   class MessageProducer
-    def initialize(config, logger, topic: 'topic_events')
+    def initialize(config, logger, topic='topic_events')
       raise ArgumentError, "missing module base_routing_key " unless config[:base_routing_key]
       @base_routing_key = config[:base_routing_key]
       @logger = logger
