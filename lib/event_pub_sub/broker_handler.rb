@@ -1,13 +1,13 @@
 module EventPubSub
   class BrokerHandler
-    def initialize(config, logger)
+    def initialize(config, logger, topic: 'topic_events')
       raise ArgumentError, 'missing broker ip' unless config[:ip]
       raise ArgumentError, 'missing broker port' unless config[:port]
       raise ArgumentError, 'missing broker username' unless config[:username]
       raise ArgumentError, 'missing broker password' unless config[:password]
-      @topic_name = config[:topic_name].present? ? config[:topic_name] : 'topic_events'
       @config = config
       @logger = logger
+      @topic = topic
     end
 
     def start_connection
@@ -55,7 +55,7 @@ module EventPubSub
     end
 
     def topic
-      @topic ||= channel.topic(@topic_name, durable: true)
+      @topic ||= channel.topic(@topic, durable: true)
     end
 
     def channel
