@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    event-pub-sub (3.0.1)
+    event-pub-sub (3.1.0)
       activesupport
       bunny (= 2.3.0)
 
