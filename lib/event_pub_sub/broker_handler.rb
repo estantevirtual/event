@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 module EventPubSub
   class BrokerHandler
-    def initialize(config, logger, topic='topic_events')
+    def initialize(config, logger, topic = 'topic_events')
       raise ArgumentError, 'missing broker ip' unless config[:ip]
       raise ArgumentError, 'missing broker port' unless config[:port]
       raise ArgumentError, 'missing broker username' unless config[:username]
       raise ArgumentError, 'missing broker password' unless config[:password]
+
       @config = config
       @logger = logger
       @topic_name = topic
@@ -13,7 +16,7 @@ module EventPubSub
     def start_connection
       @connection = build_connection
       @connection.start
-    rescue => e
+    rescue StandardError => e
       @logger.error "#{e.message} - #{e.class}\n #{e.backtrace.join("\n")}"
     end
 
@@ -30,13 +33,13 @@ module EventPubSub
       @queue.bind(topic, routing_key: '#')
     end
 
-    def subscribe(consumer_name, params = { ack: true, block: false }, &block)
+    def subscribe(consumer_name, params = { manual_ack: true, block: false }, &block)
       params[:consumer_tag] = consumer_name
       @queue.subscribe(params) do |delivery_info, properties, payload|
         begin
           block.call(delivery_info, properties, payload)
-          channel.ack(delivery_info.delivery_tag)
-        rescue => e
+          channel.manual_ack(delivery_info.delivery_tag)
+        rescue StandardError => e
           channel.nack(delivery_info.delivery_tag, false, false)
           raise e
         end
