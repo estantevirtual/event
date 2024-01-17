@@ -33,7 +33,7 @@ module EventPubSub
       @queue.bind(topic, routing_key: '#')
     end
 
-    def subscribe(consumer_name, params = { ack: true, block: false }, &block)
+    def subscribe(consumer_name, params = { manual_ack: true, block: false }, &block)
       params[:consumer_tag] = consumer_name
       @queue.subscribe(params) do |delivery_info, properties, payload|
         begin
