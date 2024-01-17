@@ -38,7 +38,7 @@ module EventPubSub
       @queue.subscribe(params) do |delivery_info, properties, payload|
         begin
           block.call(delivery_info, properties, payload)
-          channel.manual_ack(delivery_info.delivery_tag)
+          channel.ack(delivery_info.delivery_tag)
         rescue StandardError => e
           channel.nack(delivery_info.delivery_tag, false, false)
           raise e
